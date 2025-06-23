@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Панель модератора | IGRA FORUM</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .moderator-panel {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        
+        .user-list {
+            margin-top: 30px;
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .user-list th, .user-list td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .user-list th {
+            background-color: #f8f8f8;
+            font-weight: bold;
+        }
+        
+        .user-list tr:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .ban-btn, .unban-btn {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .ban-btn {
+            background-color: #ff4d4d;
+            color: white;
+        }
+        
+        .unban-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+        
+        .status-banned {
+            color: #ff4d4d;
+            font-weight: bold;
+        }
+        
+        .status-active {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+        
+        .search-users {
+            margin-bottom: 20px;
+        }
+        
+        .search-users input {
+            padding: 10px;
+            width: 300px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .moderator-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">IGRA FORUM</div>
+            <nav>
+                <a href="index.html">Главная</a>
+                <a href="about.html">О нас</a>
+                <a href="login.html">Выход</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container moderator-panel">
+        <div class="moderator-header">
+            <h1>Панель модератора</h1>
+            <div class="search-users">
+                <input type="text" placeholder="Поиск пользователей...">
+            </div>
+        </div>
+
+        <table class="user-list">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Имя пользователя</th>
+                    <th>Email</th>
+                    <th>Дата регистрации</th>
+                    <th>Статус</th>
+                    <th>Действия</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Ivan87</td>
+                    <td>ivan.user124@example.com</td>
+                    <td>15.04.2025</td>
+                    <td class="status-active">Активен</td>
+                    <td><button class="ban-btn">Запретить</button></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>OlgaNet</td>
+                    <td>olga.network45@mailservice.org</td>
+                    <td>22.03.2025</td>
+                    <td class="status-banned">Заблокирован</td>
+                    <td><button class="unban-btn">Разрешить</button></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Marina66</td>
+                    <td>marina.speed88@webprovider.net</td>
+                    <td>10.05.2025</td>
+                    <td class="status-active">Активен</td>
+                    <td><button class="ban-btn">Запретить</button></td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>SergeyPro</td>
+                    <td>sergey.proconnect@servicebox.com</td>
+                    <td>05.01.2025</td>
+                    <td class="status-active">Активен</td>
+                    <td><button class="ban-btn">Запретить</button></td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>AlexTech</td>
+                    <td>alex.techsupport@networkingsolutions.io</td>
+                    <td>18.05.2025</td>
+                    <td class="status-banned">Заблокирован</td>
+                    <td><button class="unban-btn">Разрешить</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <footer>
+        <div class="container">
+            &copy; 2025 IGRA FORUM — Все права защищены.
+        </div>
+    </footer>
+
+    <script>
+        // Обработка действий модератора
+        document.querySelectorAll('.ban-btn, .unban-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const row = this.closest('tr');
+                const statusCell = row.querySelector('td:nth-child(5)');
+                const actionCell = row.querySelector('td:nth-child(6)');
+                
+                if (this.classList.contains('ban-btn')) {
+                    statusCell.textContent = 'Заблокирован';
+                    statusCell.className = 'status-banned';
+                    this.textContent = 'Разрешить';
+                    this.className = 'unban-btn';
+                    alert('Пользователю запрещено писать на форуме');
+                } else {
+                    statusCell.textContent = 'Активен';
+                    statusCell.className = 'status-active';
+                    this.textContent = 'Запретить';
+                    this.className = 'ban-btn';
+                    alert('Пользователю разрешено писать на форуме');
+                }
+            });
+        });
+
+        // Поиск пользователей
+        document.querySelector('.search-users input').addEventListener('input', function() {
+            const searchText = this.value.toLowerCase();
+            const rows = document.querySelectorAll('.user-list tbody tr');
+            
+            rows.forEach(row => {
+                const username = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+                const email = row.querySelector('td:nth-child(3)').textContent.toLowerCase();
+                
+                if (username.includes(searchText) || email.includes(searchText)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

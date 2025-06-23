@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <title>Вход | IGRA FORUM</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div class="container auth-container">
+        <h2>Вход на форум</h2>
+        <form id="login-form" class="auth-form">
+            <input type="text" id="login-username" placeholder="Имя пользователя" required />
+            <input type="password" id="login-password" placeholder="Пароль" required />
+            <button type="submit">Войти</button>
+            <p>Нет аккаунта? <a href="register.html">Зарегистрироваться</a></p>
+        </form>
+    </div>
+
+    <script>
+        const loginForm = document.getElementById('login-form');
+
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const username = document.getElementById('login-username').value.trim();
+            const password = document.getElementById('login-password').value;
+
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+
+            const user = users.find(u => u.username === username && u.password === password);
+
+            if (user) {
+                alert('Вход успешен!');
+                // Сохраняем, что пользователь залогинен
+                localStorage.setItem('loggedInUser', username);
+                // Перенаправляем на главную страницу (например, index.html)
+                window.location.href = 'index.html';
+            } else {
+                alert('Неверный логин или пароль');
+            }
+        });
+    </script>
+</body>
+</html>

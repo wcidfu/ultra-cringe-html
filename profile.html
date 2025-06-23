@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Личный кабинет - IGRA FORUM</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container profile-container">
+        <div class="profile-header">
+            <img class="profile-avatar" src="https://avatars.mds.yandex.net/i?id=ec942fe1334b87a29fa65c6407b18819_l-5232005-images-thumbs&n=13" alt="Аватар пользователя">
+            <div>
+                <h2 class="profile-nickname"></h2>
+                <p id="user-email"></p>
+                <div style="display: flex; gap: 10px;">
+                    <form action="logout.html">
+                        <button type="submit">Выйти</button>
+                    </form>
+                    <form action="index.html">
+                        <button type="submit">На главную</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="profile-actions">
+            <a href="moderator.html" class="moderator-button">Панель модератора</a>
+        </div>
+
+        <div class="user-actions">
+            <h3>Изменить данные</h3>
+            <form>
+                <label for="password">Новый пароль:</label><br>
+                <input type="password" id="password" name="password"><br><br>
+
+                <label for="avatar">Загрузить новое фото:</label><br>
+                <input type="file" id="avatar" name="avatar"><br><br>
+
+                <button type="submit">Сохранить изменения</button>
+            </form>
+        </div>
+
+        <div class="user-topics">
+            <h3>Созданные темы</h3>
+            <ul>
+                <li>Как подключить тариф «Игровой»?</li>
+                <li>Почему лагает Wi-Fi в играх?</li>
+            </ul>
+        </div>
+
+        <div class="user-comments">
+            <h3>Мои комментарии</h3>
+            <ul>
+                <li>Поддерживаю, у меня такая же проблема!</li>
+                <li>Попробуй сбросить настройки роутера.</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        const username = localStorage.getItem('loggedInUser');
+        const email = localStorage.getItem('loggedInUserEmail');
+
+        if (!username) {
+            alert("Вы не авторизованы!");
+            window.location.href = "login.html";
+        } else {
+            document.querySelector('.profile-nickname').textContent = username;
+            document.getElementById('user-email').textContent = email ? `Email (логин): ${email}` : `Логин: ${username}`;
+        }
+    </script>
+</body>
+</html>

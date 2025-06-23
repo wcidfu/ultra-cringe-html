@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Обсуждение темы | IGRA FORUM</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            background-color: #ff6600;
+            padding: 20px 0;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+            color: #FF7A00;
+        }
+
+        nav {
+            margin-top: 10px;
+        }
+
+        nav a {
+            color: #FF7A00;
+            text-decoration: none;
+            margin-right: 20px;
+            font-weight: bold;
+        }
+
+        .discussion-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .topic-header {
+            border-bottom: 2px solid #FF7A00;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .topic-header h1 {
+            margin-top: 0;
+            color: #FF7A00;
+        }
+
+        .topic-meta {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .post {
+            display: flex;
+            gap: 20px;
+            padding: 20px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .post-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #999;
+        }
+
+        .post-content {
+            flex: 1;
+        }
+
+        .post-author {
+            font-weight: bold;
+            color: #FF7A00;
+            margin-bottom: 5px;
+        }
+
+        .post-date {
+            color: #999;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+
+        .post-text {
+            line-height: 1.6;
+        }
+
+        .reply-form {
+            margin-top: 30px;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .reply-form h3 {
+            margin-top: 0;
+            color: #FF7A00;
+        }
+
+        .reply-form textarea {
+            width: 100%;
+            height: 120px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: Arial, sans-serif;
+            resize: vertical;
+            margin-bottom: 15px;
+        }
+
+        .reply-form button {
+            background-color: #FF7A00;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .reply-form button:hover {
+            background-color: #e56a00;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #FF7A00;
+            text-decoration: none;
+        }
+
+        footer {
+            margin-top: 40px;
+            background-color: #eee;
+            padding: 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">IGRA FORUM</div>
+            <nav>
+                <a href="index.html">Главная</a>
+                <a href="about.html">О нас</a>
+                <a href="login.html">Мой профиль</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <a href="index.html" class="back-link">← Вернуться к списку тем</a>
+        
+        <div class="discussion-container" id="discussion-container">
+            <div class="topic-header">
+                <h1>Проблемы с интернетом в районе Центр</h1>
+                <div class="topic-meta">
+                    Автор: Ivan87 | Создана: 18.05.2025 | Ответов: 12
+                </div>
+            </div>
+
+            <div class="post">
+                <div class="post-avatar">I</div>
+                <div class="post-content">
+                    <div class="post-author">Ivan87</div>
+                    <div class="post-date">18.05.2025, 14:30</div>
+                    <div class="post-text">
+                        <p>Уже третий день наблюдаются перебои с интернетом вечером после 18:00. Скорость падает до практически нуля, некоторые сайты вообще не открываются. Пинг до роутера в норме, проблема явно на стороне провайдера.</p>
+                        <p>Есть ли у кого-то ещё такая проблема в центральном районе? Как вы решаете этот вопрос?</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="post">
+                <div class="post-avatar">S</div>
+                <div class="post-content">
+                    <div class="post-author">support_team</div>
+                    <div class="post-date">18.05.2025, 15:45</div>
+                    <div class="post-text">
+                        <p>Мы проводим профилактические работы на узле в вашем районе с 18:00 до 23:00 ежедневно до 22 мая. Это может вызывать временное снижение скорости интернета.</p>
+                        <p>Приносим извинения за временные неудобства. После завершения работ скорость восстановится.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="post">
+                <div class="post-avatar">M</div>
+                <div class="post-content">
+                    <div class="post-author">Marina66</div>
+                    <div class="post-date">18.05.2025, 16:20</div>
+                    <div class="post-text">
+                        <p>У меня то же самое! Очень мешает работать, так как как раз вечером сажусь за удаленную работу. Спасибо за информацию, support_team!</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="reply-form">
+                <h3>Оставить ответ</h3>
+                <form id="reply-form">
+                    <textarea placeholder="Напишите ваш ответ..." required></textarea>
+                    <button type="submit">Отправить ответ</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            &copy; 2025 IGRA FORUM — Все права защищены.
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('reply-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const textarea = this.querySelector('textarea');
+            const replyText = textarea.value.trim();
+            if (replyText === '') {
+                alert('Пожалуйста, введите текст ответа');
+                return;
+            }
+
+            const username = 'Вы';
+            const initial = username[0].toUpperCase();
+            const now = new Date();
+            const formattedDate = now.toLocaleDateString('ru-RU') + ', ' + now.toLocaleTimeString('ru-RU').slice(0, 5);
+
+            const newPost = document.createElement('div');
+            newPost.className = 'post';
+            newPost.innerHTML = `
+                <div class="post-avatar">${initial}</div>
+                <div class="post-content">
+                    <div class="post-author">${username}</div>
+                    <div class="post-date">${formattedDate}</div>
+                    <div class="post-text">
+                        <p>${replyText.replace(/\n/g, '<br>')}</p>
+                    </div>
+                </div>
+            `;
+
+            const discussionContainer = document.getElementById('discussion-container');
+            const replyForm = this.closest('.reply-form');
+            discussionContainer.insertBefore(newPost, replyForm);
+
+            textarea.value = '';
+
+            const topicMeta = document.querySelector('.topic-meta');
+            const match = topicMeta.textContent.match(/Ответов: (\d+)/);
+            if (match) {
+                const newCount = parseInt(match[1]) + 1;
+                topicMeta.textContent = topicMeta.textContent.replace(/Ответов: \d+/, 'Ответов: ' + newCount);
+            }
+
+            alert('Ваш ответ успешно опубликован!');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+}
+
+h1, h2, h3 {
+    color: #FF7A00;
+}
+
+a {
+    color: #FF7A00;
+    text-decoration: none;
+}
+
+.forum-topic {
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+}
+
+.login-form, .register-form {
+    max-width: 400px;
+    margin: 50px auto;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+input[type="text"], input[type="password"], input[type="email"], input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #FF7A00;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #e56a00;
+}
+
+/* Стиль для личного кабинета */
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.profile-header {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.profile-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #000000; /* Черная обводка */
+}
+
+.profile-nickname {
+    margin: 0;
+}
+
+.user-actions form {
+    margin-top: 10px;
+}
+
+.user-actions label {
+    font-weight: bold;
+}
+
+.user-topics ul, .user-comments ul {
+    list-style: disc;
+    padding-left: 20px;
+    color: #333;
+}
+
+.user-topics li, .user-comments li {
+    margin-bottom: 5px;
+}

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <title>Создать новую тему — IGRA FORUM</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            background-color: #ff6600;
+            padding: 20px 0;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 600px;
+            margin: 40px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+        }
+
+        h1 {
+            color: #FF7A00;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 6px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box;
+            resize: vertical;
+        }
+
+        textarea {
+            height: 100px;
+        }
+
+        button {
+            margin-top: 20px;
+            background-color: #FF7A00;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #e55b00;
+        }
+
+        .message {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="index.html" style="color:#e55b00; font-weight:bold; text-decoration:none;">&larr; Назад к форуму</a>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1>Создать новую тему</h1>
+        <form id="create-topic-form">
+            <label for="title">Заголовок темы</label>
+            <input type="text" id="title" name="title" required minlength="5" maxlength="100" />
+
+            <label for="description">Описание / краткое содержание</label>
+            <textarea id="description" name="description" required minlength="10" maxlength="300"></textarea>
+
+            <button type="submit">Создать тему</button>
+            <p class="message" id="message"></p>
+        </form>
+    </main>
+
+    <script>
+        // Проверяем, что пользователь залогинен
+        const user = localStorage.getItem('loggedInUser');
+        if (!user) {
+            alert('Только авторизованные пользователи могут создавать темы.');
+            window.location.href = 'login.html';
+        }
+
+        const form = document.getElementById('create-topic-form');
+        const messageEl = document.getElementById('message');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const title = form.title.value.trim();
+            const description = form.description.value.trim();
+
+            if (title.length < 5) {
+                messageEl.textContent = 'Заголовок должен быть не менее 5 символов.';
+                messageEl.style.color = 'red';
+                return;
+            }
+            if (description.length < 10) {
+                messageEl.textContent = 'Описание должно быть не менее 10 символов.';
+                messageEl.style.color = 'red';
+                return;
+            }
+
+            // Загружаем существующие темы
+            let topics = [];
+            try {
+                const stored = localStorage.getItem('topics');
+                if (stored) {
+                    topics = JSON.parse(stored);
+                    if (!Array.isArray(topics)) topics = [];
+                }
+            } catch {
+                topics = [];
+            }
+
+            // Добавляем новую тему
+            topics.push({
+                title: title,
+                description: description,
+                author: user,
+                replies: 0,
+                lastReply: new Date().toLocaleDateString('ru-RU')
+            });
+
+            // Сохраняем обратно в localStorage
+            localStorage.setItem('topics', JSON.stringify(topics));
+
+            // Успешное сообщение и редирект
+            messageEl.style.color = 'green';
+            messageEl.textContent = 'Тема успешно создана! Переадресация...';
+
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 1500);
+        });
+    </script>
+</body>
+</html>

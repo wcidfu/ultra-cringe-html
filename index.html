@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>IGRA FORUM — Форум провайдера</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { margin: 0; font-family: Arial, sans-serif; background-color: #f4f4f4; color: #333; }
+        header { background-color: #ff6600; padding: 20px 0; }
+        .container { width: 90%; max-width: 960px; margin: 0 auto; }
+        .logo { font-size: 26px; font-weight: bold; color: #FF7A00; }
+        nav a { color: #FF7A00; text-decoration: none; margin-right: 20px; font-weight: bold; }
+        .search { background-color: #fff; padding: 20px 0; border-bottom: 1px solid #ccc; }
+        .search-form input { padding: 10px; font-size: 16px; width: 70%; border: 1px solid #ccc; border-radius: 4px; }
+        .search-form button { padding: 10px 20px; background-color: #ff6600; color: white; border: none; border-radius: 4px; margin-left: 10px; cursor: pointer; }
+        .main-content { display: flex; gap: 20px; margin-top: 20px; }
+        .topics { background-color: white; padding: 20px; border-radius: 8px; flex: 2; }
+        .topics h2 { margin-top: 0; color: #FF7A00; }
+        .topic { padding: 15px 0; border-bottom: 1px solid #eee; cursor: pointer; }
+        .topic:hover { background-color: #f9f9f9; }
+        .topic-info { font-size: 14px; color: #666; margin-top: 5px; }
+        .sidebar { flex: 1; }
+        .create-topic-btn { display: block; width: 100%; padding: 12px; background-color: #FF7A00; color: white; text-align: center; border-radius: 4px; font-weight: bold; cursor: pointer; margin-bottom: 20px; text-decoration: none; }
+        .categories h3 { margin-top: 0; color: #FF7A00; }
+        .categories ul { list-style: none; padding: 0; }
+        .categories li { padding: 8px 0; border-bottom: 1px solid #eee; }
+        .categories a { color: #333; text-decoration: none; }
+        .categories a:hover { color: #FF7A00; }
+        footer { margin-top: 40px; background-color: #eee; padding: 20px; text-align: center; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">IGRA FORUM</div>
+            <nav id="nav-links">
+                <a href="index.html">Главная</a>
+                <a href="about.html">О нас</a>
+                <span id="auth-links"></span>
+            </nav>
+        </div>
+    </header>
+
+    <section class="search">
+        <div class="container">
+            <form class="search-form">
+                <input type="text" placeholder="Поиск по форуму..." id="search-input">
+                <button type="submit">Найти</button>
+            </form>
+        </div>
+    </section>
+
+    <main class="container main-content">
+        <div class="topics">
+            <h2>Последние темы</h2>
+            <div id="topics-list">
+                <!-- загруженные темы -->
+            </div>
+        </div>
+        <div class="sidebar">
+            <a href="create-topic.html" class="create-topic-btn">Создать новую тему</a>
+            <div class="categories">
+                <h3>Категории</h3>
+                <ul>
+                    <li><a href="#">Проблемы с интернетом</a></li>
+                    <li><a href="#">Тарифы и подключение</a></li>
+                    <li><a href="#">Оборудование</a></li>
+                    <li><a href="#">Игровые вопросы</a></li>
+                    <li><a href="#">Техническая поддержка</a></li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            &copy; 2025 IGRA FORUM — Все права защищены.
+        </div>
+    </footer>
+
+    <script>
+        // Шапка авторизации
+        const authLinks = document.getElementById('auth-links');
+        const user = localStorage.getItem('loggedInUser');
+        if (user) {
+            authLinks.innerHTML = `<a href=\"profile.html\">${user}</a> <button id=\"logout-btn\" style="background: none; border: 1px solid #FF7A00; color: #FF7A00; padding: 4px 10px; border-radius: 4px; font-weight: bold; cursor: pointer; margin-left: 10px;">Выйти</button>`;
+            document.getElementById('logout-btn').addEventListener('click', () => { 
+                localStorage.removeItem('loggedInUser'); 
+                location.reload(); 
+            });
+        } else {
+            authLinks.innerHTML = `<a href=\"login.html\">Вход</a> / <a href=\"register.html\">Регистрация</a>`;
+        }
+
+        // Инициализация тем
+        const defaultTopics = [
+            { title: 'Проблемы с интернетом в районе Центр', description: 'Уже третий день наблюдаются перебои с интернетом вечером после 18:00...', author: 'Ivan87', replies: 12, lastReply: '20.05.2025' },
+            { title: 'Какой тариф выбрать для семьи?', description: 'Посоветуйте оптимальный тариф для семьи из 4 человек...', author: 'OlgaNet', replies: 5, lastReply: '19.05.2025' },
+            { title: 'Плохой сигнал Wi-Fi в спальне', description: 'Роутер стоит в гостиной, а в спальне очень слабый сигнал...', author: 'AlexTech', replies: 8, lastReply: '18.05.2025' },
+            { title: 'Игровой тариф - стоит ли переходить?', description: 'Рассматриваю переход на игровой тариф, но сомневаюсь...', author: 'GameMaster', replies: 15, lastReply: '17.05.2025' }
+        ];
+
+        // Загрузка тем из localStorage или создание дефолтных
+        let topics = JSON.parse(localStorage.getItem('topics'));
+        if (!topics) {
+            topics = defaultTopics;
+            localStorage.setItem('topics', JSON.stringify(topics));
+        }
+
+        const topicsList = document.getElementById('topics-list');
+        
+        // Функция отрисовки тем
+        function renderTopics(filter = '') {
+            topicsList.innerHTML = '';
+            
+            const filteredTopics = topics.filter(topic => 
+                topic.title.toLowerCase().includes(filter.toLowerCase()) || 
+                topic.description.toLowerCase().includes(filter.toLowerCase())
+            );
+            
+            if (filteredTopics.length === 0) {
+                topicsList.innerHTML = '<p>Темы не найдены</p>';
+                return;
+            }
+            
+            filteredTopics.forEach((topic, index) => {
+                const topicElement = document.createElement('div');
+                topicElement.className = 'topic';
+                topicElement.innerHTML = `
+                    <h3>${topic.title}</h3>
+                    <p>${topic.description}</p>
+                    <div class="topic-info">Автор: ${topic.author} | Ответов: ${topic.replies} | Последнее сообщение: ${topic.lastReply}</div>
+                `;
+                topicElement.addEventListener('click', () => {
+                    localStorage.setItem('currentTopicIndex', index);
+                    window.location.href = 'discussion.html';
+                });
+                topicsList.appendChild(topicElement);
+            });
+        }
+
+        // Первоначальная загрузка тем
+        renderTopics();
+        
+        // Обработка поиска
+        document.querySelector('.search-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const searchTerm = document.getElementById('search-input').value.trim();
+            renderTopics(searchTerm);
+        });
+
+        // Обновление списка тем при изменении в других вкладках
+        window.addEventListener('storage', function(e) {
+            if (e.key === 'topics') {
+                topics = JSON.parse(e.newValue);
+                renderTopics();
+            }
+        });
+    </script>
+</body>
+</html>
